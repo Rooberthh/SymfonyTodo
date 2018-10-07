@@ -1,17 +1,22 @@
 index:
     path: /
-    controller: App\Controller\TasksController::index
+    controller: App\Controller\TasksController::indexAction
     methods: [GET]
 
-delete_task:
+destroy_task:
     path: /tasks/{id}
-    controller: App\Controller\TasksController::destroy
+    controller: App\Controller\TasksController::destroyAction
     methods: [DELETE]
 
 update_task:
     path: /tasks/{id}
-    controller: App\Controller\TasksController::update
-    methods: [PUT]
+    controller: App\Controller\TasksController::updateAction
+    methods: [PATCH]
+
+store_task:
+    path: /tasks
+    controller: App\Controller\TasksController::storeAction
+    methods: [POST]
 
 fetch_tasks:
     path: /api/tasks

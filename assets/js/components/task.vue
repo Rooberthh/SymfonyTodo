@@ -42,7 +42,9 @@
 
               axios.delete('/tasks/' + this.id).then(response => {
                   console.log(response.data);
-              })
+              });
+
+              this.$emit('deleted', this.id);
 
             },
             update(){

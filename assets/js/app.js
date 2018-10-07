@@ -12,9 +12,8 @@ require('../css/app.scss');
 // var $ = require('jquery');
 
 import Vue from 'vue';
-
 import TasksList from './components/tasksList.vue'
-
+window.axios = require('axios');
 /**
  * Create a fresh Vue Application instance
  */

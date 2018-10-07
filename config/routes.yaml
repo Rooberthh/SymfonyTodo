@@ -5,3 +5,7 @@ index:
 edit_task:
     path: /{id}/edit
     controller: App\Controller\TasksController::edit
+
+fetch_tasks:
+    path: /api/tasks
+    controller: App\Controller\TasksController::edit

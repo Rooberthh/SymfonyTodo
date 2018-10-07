@@ -36,12 +36,16 @@ class TasksController extends AbstractController
         return new response('Task have been updated', 200);
     }
 
-    public function edit($id)
+    public function destroy($id)
     {
-        $repository = $this->getDoctrine()->getRepository(Tasks::class);
+        $entityManager = $this->getDoctrine()->getManager();
+        $task = $this->getDoctrine()->getRepository(Tasks::class)->find($id);
 
-        $task = $repository->find($id);
+        $entityManager->remove($task);
+        $entityManager->flush();
 
-        return $this->render('tasks/edit.html.twig', compact($task));
+        return new response('Deleted', 200);
+
+
     }
 }

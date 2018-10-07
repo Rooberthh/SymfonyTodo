@@ -27,10 +27,8 @@
             fetch(){
                 axios.get('api/tasks')
                     .then(response => {
-                        console.log(response);
                         this.dataSet = response.data;
                     });
-                console.log('tasks fetched');
             }
         }
     }

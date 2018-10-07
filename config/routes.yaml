@@ -1,15 +1,18 @@
 index:
     path: /
     controller: App\Controller\TasksController::index
+    methods: [GET]
 
-edit_task:
-    path: /{id}/edit
-    controller: App\Controller\TasksController::edit
-
-fetch_tasks:
-    path: /api/tasks
-    controller: App\Controller\Api\TasksController::index
+delete_task:
+    path: /tasks/{id}
+    controller: App\Controller\TasksController::destroy
+    methods: [DELETE]
 
 update_task:
     path: /tasks/{id}
     controller: App\Controller\TasksController::update
+    methods: [PUT]
+
+fetch_tasks:
+    path: /api/tasks
+    controller: App\Controller\Api\TasksController::index

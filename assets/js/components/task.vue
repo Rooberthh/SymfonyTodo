@@ -17,6 +17,7 @@
         </div>
         <button type="button" class="btn btn-danger" @click="editing = false">Cancel</button>
         <button type="submit" class="btn btn-info" >Update</button>
+        <button type="button" class="btn btn-link" @click="destroy()">Delete Task</button>
       </form>
     </div>
   </div>
@@ -37,6 +38,11 @@
         },
         methods: {
             destroy(){
+              console.log('destroy called');
+
+              axios.delete('/tasks/' + this.id).then(response => {
+                  console.log(response.data);
+              })
 
             },
             update(){

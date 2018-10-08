@@ -31,7 +31,6 @@ class TasksController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $task = new Tasks();
-
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
         $task->setCreatedAt(new \DateTime());
@@ -50,6 +49,8 @@ class TasksController extends AbstractController
      */
     public function updateAction($id, Request $request)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
         $data = json_decode($request->getContent(), true);
 
         $repository = $this->getDoctrine()->getRepository(Tasks::class);
@@ -57,6 +58,9 @@ class TasksController extends AbstractController
 
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
+
+        $entityManager->persist($task);
+        $entityManager->flush();
 
         return new response('Task have been updated', 200);
     }

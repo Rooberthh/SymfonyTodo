@@ -45,7 +45,7 @@
             },
 
             add(index){
-                this.dataSet.push(index, 1);
+                this.dataSet.push(index);
                 this.$emit('added');
                 console.log('added');
             }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Tasks;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +40,11 @@ class TasksController extends AbstractController
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return new response('Created', 200);
+        return new JsonResponse(
+            array(
+            'title' => $task->getTitle(),
+            'description' => $task->getDescription())
+            , '200');
     }
 
     /* @Route('/tasks/{id}', methods={PATCH})

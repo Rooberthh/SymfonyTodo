@@ -38,8 +38,6 @@
         },
         methods: {
             destroy(){
-              console.log('destroy called');
-
               axios.delete('/tasks/' + this.id).then(response => {
                   console.log(response.data);
               });

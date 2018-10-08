@@ -7,6 +7,9 @@
         <div v-else class="list-group" v-for="(task, index) in dataSet">
             <task :task="task" :key="task.id" @deleted="remove(index)"></task>
         </div>
+
+        <a href="#" class="btn btn-primary mt-4" @click="$modal.show('new-task')">Add Task</a>
+
         <new-task @created="add"></new-task>
     </div>
 </template>
@@ -41,13 +44,11 @@
             remove(index){
                 this.dataSet.splice(index, 1);
                 this.$emit('removed');
-                console.log('deleted');
             },
 
             add(index){
                 this.dataSet.push(index);
                 this.$emit('added');
-                console.log('added');
             }
         },
     }

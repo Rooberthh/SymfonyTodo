@@ -1,0 +1,20 @@
+<modal name="new-task" height="auto" width="400px">
+    <form method="POST" action="/tasks" class="p-4">
+        <div class="flex mb-4">
+            <div class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" id="title" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="title" class="form-label">Description</label>
+                <input type="text" name="description" id="description" class="form-control">
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <a href="#" class="btn btn-danger mr-4 flex-grow-1" @click="$modal.hide('new-task')">Cancel</a>
+            <button type="submit" class="btn btn-primary flex-grow-1">Create Task</button>
+        </div>
+    </form>
+</modal>

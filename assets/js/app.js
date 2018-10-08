@@ -13,7 +13,11 @@ require('../css/app.scss');
 
 import Vue from 'vue';
 import TasksList from './components/tasksList.vue'
+import VModal from 'vue-js-modal'
 window.axios = require('axios');
+
+Vue.use(VModal);
+
 /**
  * Create a fresh Vue Application instance
  */

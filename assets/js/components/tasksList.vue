@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Task lists component</h1>
+        <h1>Tasks</h1>
         <div v-if="!dataSet.length">
             You do not have any tasks setup
         </div>

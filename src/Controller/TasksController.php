@@ -41,9 +41,9 @@ class TasksController extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(
-            array(
+            [
             'title' => $task->getTitle(),
-            'description' => $task->getDescription())
+            'description' => $task->getDescription()]
             , '200');
     }
 

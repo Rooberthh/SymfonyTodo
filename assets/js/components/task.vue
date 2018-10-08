@@ -46,7 +46,6 @@
 
             },
             update(){
-              console.log('Update Called!');
               axios.patch('/tasks/' + this.id, {
                   title: this.title,
                   description: this.description

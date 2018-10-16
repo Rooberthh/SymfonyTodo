@@ -20,7 +20,7 @@ class TasksRepository extends ServiceEntityRepository
 
     public function findAll()
     {
-        return $this->findBy([], ['created_at' => 'desc']);
+        return $this->findBy([], ['deadline' => 'asc']);
     }
 
     /*

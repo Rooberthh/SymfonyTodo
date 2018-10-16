@@ -33,7 +33,7 @@ class TasksController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $task = new Tasks();
-        $offsetHours = $data['deadline'];
+        $offsetHours = (int)$data['deadline'];
 
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);

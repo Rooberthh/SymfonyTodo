@@ -1,6 +1,6 @@
 <template>
   <div v-if="!editing">
-    <div class="list-group-item my-2">
+    <div class="list-group-item my-2" :class="hasPassed ? 'border border-danger' : ''">
       <div class="d-flex">
         <h5 class="flex-grow-1" v-text="title"></h5>
         <span class="badge badge-pill badge-dark"> {{ deadline }}</span>
@@ -54,6 +54,12 @@
                 description: this.task.description,
             }
         },
+        mounted(){
+            let deadline = this.task.deadline.slice(0, -6);
+            console.log(deadline);
+            let a = new Date;
+            console.log(a.toISOString().slice(0,-5));
+        },
         methods: {
             destroy(){
               axios.delete('/tasks/' + this.id).then(response => {
@@ -78,6 +84,13 @@
                 if(this.task.deadline !== 'Null'){
                     return moment(this.task.deadline).fromNow();
                 }
+            },
+            hasPassed(){
+                let deadline = this.task.deadline.slice(0, -6);
+                let curDate = new Date;
+                curDate = curDate.toISOString().slice(0,-5);
+
+                return (deadline < curDate)
             }
         }
     }

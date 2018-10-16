@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Carbon\Carbon;
 use App\Entity\Tasks;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,10 +33,15 @@ class TasksController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $task = new Tasks();
+        $offsetHours = $data['deadline'];
+
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
         $task->setCreatedAt(new \DateTime());
         $task->setUpdatedAt(new \DateTime());
+        $task->setDeadline(Carbon::now($offsetHours));
+
+
 
         $entityManager->persist($task);
         $entityManager->flush();
@@ -43,7 +49,8 @@ class TasksController extends AbstractController
         return new JsonResponse(
             [
             'title' => $task->getTitle(),
-            'description' => $task->getDescription()]
+            'description' => $task->getDescription(),
+            'deadline' => $task->getDeadline()]
             , '200');
     }
 
@@ -55,12 +62,9 @@ class TasksController extends AbstractController
     public function updateAction($id, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-
         $data = json_decode($request->getContent(), true);
 
-        $repository = $this->getDoctrine()->getRepository(Tasks::class);
-        $task = $repository->find($id);
-
+        $task = $this->getDoctrine()->getRepository(Tasks::class)->find($id);
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
 
@@ -83,7 +87,5 @@ class TasksController extends AbstractController
         $entityManager->flush();
 
         return new response('Deleted', 200);
-
-
     }
 }

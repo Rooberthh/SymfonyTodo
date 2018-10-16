@@ -1,9 +1,19 @@
 <template>
   <div v-if="!editing">
-    <div class="list-group-item">
-      <h5 v-text="title"></h5>
+    <div class="list-group-item my-2">
+      <div class="d-flex">
+        <h5 class="flex-grow-1" v-text="title"></h5>
+        <span class="badge badge-pill badge-dark"> {{ deadline }}</span>
+      </div>
       <p v-text="description"></p>
-      <button class="btn btn-info" @click="editing = true">Edit</button>
+      <div class="d-flex">
+        <div class="flex-grow-1">
+          <button class="btn btn-info" @click="editing = true">Edit</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-link" @click="destroy()">Delete Task</button>
+        </div>
+      </div>
     </div>
   </div>
   <div v-else>
@@ -15,9 +25,15 @@
         <div class="form-group">
           <input class="form-control" type="text" name="description" id="description" placeholder="Description" v-model="description">
         </div>
-        <button type="button" class="btn btn-danger" @click="editing = false">Cancel</button>
-        <button type="submit" class="btn btn-info" >Update</button>
-        <button type="button" class="btn btn-link" @click="destroy()">Delete Task</button>
+        <div class="d-flex">
+          <div class="flex-grow-1">
+            <button type="button" class="btn btn-danger" @click="editing = false">Cancel</button>
+            <button type="submit" class="btn btn-outline-info" >Update</button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-link" @click="destroy()">Delete Task</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -25,6 +41,8 @@
 </template>
 
 <script>
+  import moment from 'moment';
+
     export default {
         name: "task",
         props: ['task'],
@@ -33,7 +51,7 @@
                 id: this.task.id,
                 editing: false,
                 title: this.task.title,
-                description: this.task.description
+                description: this.task.description,
             }
         },
         methods: {
@@ -43,7 +61,6 @@
               });
 
               this.$emit('deleted', this.id);
-
             },
             update(){
               axios.patch('/tasks/' + this.id, {
@@ -54,6 +71,13 @@
               });
 
               this.editing = false;
+            }
+        },
+        computed: {
+            deadline(){
+                if(this.task.deadline !== 'Null'){
+                    return moment(this.task.deadline).fromNow();
+                }
             }
         }
     }

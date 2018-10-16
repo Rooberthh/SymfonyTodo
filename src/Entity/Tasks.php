@@ -36,6 +36,11 @@ class Tasks
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $deadline;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Tasks
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?\DateTimeInterface
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(\DateTimeInterface $deadline): self
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }

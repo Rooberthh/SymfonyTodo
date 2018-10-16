@@ -10,7 +10,12 @@
 
                     <div class="form-group">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="10" class="form-control" v-model="description"></textarea>
+                        <textarea name="description" id="description" cols="10" rows="10" class="form-control" v-model="description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline" class="form-label">Deadline</label>
+                        <input type="text" id="deadline" class="form-control" placeholder="Deadline in hours from now" v-model="deadline">
                     </div>
                 </div>
 
@@ -29,14 +34,16 @@
         data() {
             return {
                 title: '',
-                description: ''
+                description: '',
+                deadline: ''
             }
         },
         methods: {
             addTask(){
                 axios.post('/tasks', {
                     title: this.title,
-                    description: this.description
+                    description: this.description,
+                    deadline: this.deadline
                 }).catch(error => {
                     console.log(error.response.data);
                 }).then(({data}) => {

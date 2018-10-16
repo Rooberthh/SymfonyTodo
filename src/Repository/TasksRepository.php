@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @method Tasks|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tasks|null findOneBy(array $criteria, array $orderBy = null)
- * @method Tasks[]    findAll()
  * @method Tasks[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class TasksRepository extends ServiceEntityRepository
@@ -19,22 +18,10 @@ class TasksRepository extends ServiceEntityRepository
         parent::__construct($registry, Tasks::class);
     }
 
-//    /**
-//     * @return Tasks[] Returns an array of Tasks objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findAll()
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy([], ['created_at' => 'desc']);
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Tasks

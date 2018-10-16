@@ -25,6 +25,9 @@
         <div class="form-group">
           <input class="form-control" type="text" name="description" id="description" placeholder="Description" v-model="description">
         </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline in hours" v-model="offset">
+        </div>
         <div class="d-flex">
           <div class="flex-grow-1">
             <button type="button" class="btn btn-danger" @click="editing = false">Cancel</button>
@@ -52,13 +55,8 @@
                 editing: false,
                 title: this.task.title,
                 description: this.task.description,
+                offset: null
             }
-        },
-        mounted(){
-            let deadline = this.task.deadline.slice(0, -6);
-            console.log(deadline);
-            let a = new Date;
-            console.log(a.toISOString().slice(0,-5));
         },
         methods: {
             destroy(){
@@ -71,7 +69,8 @@
             update(){
               axios.patch('/tasks/' + this.id, {
                   title: this.title,
-                  description: this.description
+                  description: this.description,
+                  deadline: this.offset
               }).catch(error => {
                   console.log(error.response.data);
               });

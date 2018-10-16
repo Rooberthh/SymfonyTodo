@@ -65,8 +65,11 @@ class TasksController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $task = $this->getDoctrine()->getRepository(Tasks::class)->find($id);
+        $offsetHours = (int)$data['deadline'];
+
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
+        $task->setDeadline(Carbon::now($offsetHours));
 
         $entityManager->persist($task);
         $entityManager->flush();

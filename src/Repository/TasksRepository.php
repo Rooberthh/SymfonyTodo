@@ -22,16 +22,4 @@ class TasksRepository extends ServiceEntityRepository
     {
         return $this->findBy([], ['deadline' => 'asc']);
     }
-
-    /*
-    public function findOneBySomeField($value): ?Tasks
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

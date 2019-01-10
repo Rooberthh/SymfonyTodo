@@ -50,7 +50,8 @@ class TasksController extends AbstractController
             [
             'title' => $task->getTitle(),
             'description' => $task->getDescription(),
-            'deadline' => $task->getDeadline()]
+            'deadline' => $task->getDeadline()
+            ]
             , '200');
     }
 

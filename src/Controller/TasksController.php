@@ -39,7 +39,7 @@ class TasksController extends AbstractController
         $task->setDescription($data['description']);
         $task->setCreatedAt(new \DateTime());
         $task->setUpdatedAt(new \DateTime());
-        $task->setDeadline(Carbon::now($offsetHours));
+        $task->setDeadline(Carbon::now()->addHours($offsetHours));
 
 
 

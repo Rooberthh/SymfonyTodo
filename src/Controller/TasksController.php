@@ -41,8 +41,6 @@ class TasksController extends AbstractController
         $task->setUpdatedAt(new \DateTime());
         $task->setDeadline(Carbon::now()->addHours($offsetHours));
 
-
-
         $entityManager->persist($task);
         $entityManager->flush();
 

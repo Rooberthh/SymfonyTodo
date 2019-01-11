@@ -3,7 +3,7 @@
     <div class="list-group-item my-2" :class="hasPassed ? 'border border-danger' : ''">
       <div class="d-flex">
         <h5 class="flex-grow-1" v-text="title"></h5>
-        <span class="badge badge-pill badge-dark"> {{ deadline }}</span>
+        <span class="badge badge-pill badge-dark" v-text="this.deadline"></span>
       </div>
       <p v-text="description"></p>
       <div class="d-flex">
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import moment from 'moment';
+    import moment from 'moment';
 
     export default {
         name: "task",
@@ -55,7 +55,8 @@
                 editing: false,
                 title: this.task.title,
                 description: this.task.description,
-                offset: null
+                offset: null,
+                deadline: this.calcDeadline(this.task.deadline),
             }
         },
         methods: {
@@ -67,23 +68,27 @@
               this.$emit('deleted', this.id);
             },
             update(){
-              axios.patch('/tasks/' + this.id, {
+                axios.patch('/tasks/' + this.id, {
                   title: this.title,
                   description: this.description,
                   deadline: this.offset
-              }).catch(error => {
+                }).catch(error => {
                   console.log(error.response.data);
-              });
+                }).then(response => {
+                    let data = response.data;
 
-              this.editing = false;
+                    this.deadline = this.calcDeadline(data.deadline);
+                });
+
+                this.editing = false;
+            },
+            calcDeadline(deadline){
+                if(deadline !== "Null"){
+                    return moment(deadline).fromNow();
+                }
             }
         },
         computed: {
-            deadline(){
-                if(this.task.deadline !== 'Null'){
-                    return moment(this.task.deadline).fromNow();
-                }
-            },
             hasPassed(){
                 let deadline = this.task.deadline.slice(0, -6);
                 let curDate = new Date;

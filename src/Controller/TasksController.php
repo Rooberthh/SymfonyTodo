@@ -70,12 +70,18 @@ class TasksController extends AbstractController
 
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
-        $task->setDeadline(Carbon::now($offsetHours));
+        $task->setDeadline(Carbon::now()->addHours($offsetHours));
 
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return new response('Task have been updated', 200);
+        return new JsonResponse(
+            [
+                'title' => $task->getTitle(),
+                'description' => $task->getDescription(),
+                'deadline' => $task->getDeadline()
+            ]
+            , '200');
     }
 
     /* @Route('/tasks/{id}', methods={DELETE})

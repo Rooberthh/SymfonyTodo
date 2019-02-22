@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TasksRepository")
  */
@@ -38,6 +37,7 @@ class Tasks
 
     /**
      * @ORM\Column(type="datetime")
+     * @var string A "Y-m-d H:i:s" formatted value
      */
     private $deadline;
 

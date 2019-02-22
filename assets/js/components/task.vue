@@ -76,7 +76,6 @@
                   console.log(error.response.data);
                 }).then(response => {
                     let data = response.data;
-
                     this.deadline = this.calcDeadline(data.deadline);
                 });
 

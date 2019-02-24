@@ -55,7 +55,7 @@
                 editing: false,
                 title: this.task.title,
                 description: this.task.description,
-                offset: null,
+                offset: this.calcOffset(),
                 deadline: this.calcDeadline(this.task.deadline),
             }
         },
@@ -71,7 +71,8 @@
                 axios.patch('/tasks/' + this.id, {
                   title: this.title,
                   description: this.description,
-                  deadline: this.offset
+                  deadline: this.offset,
+                  updatedAt: this.task.updatedAt
                 }).catch(error => {
                   console.log(error.response.data);
                 }).then(response => {
@@ -85,6 +86,12 @@
                 if(deadline !== "Null"){
                     return moment(deadline).fromNow();
                 }
+            },
+            calcOffset(){
+              let test = moment(this.task.updatedAt);
+              let deadline = moment(this.task.deadline);
+
+              return Math.floor(moment.duration(deadline.diff(test)).asHours());
             }
         },
         computed: {

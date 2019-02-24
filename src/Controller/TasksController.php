@@ -68,9 +68,9 @@ class TasksController extends AbstractController
 
         $task->setTitle($data['title']);
         $task->setDescription($data['description']);
-        if($offsetHours != null){
-            $task->setDeadline(Carbon::now()->addHours($offsetHours));
-        }
+        $task->setDeadline(Carbon::now()->addHours($offsetHours));
+        $task->setUpdatedAt(Carbon::create($data['updatedAt']));
+
         $entityManager->persist($task);
         $entityManager->flush();
 

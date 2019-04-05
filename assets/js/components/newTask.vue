@@ -1,6 +1,9 @@
 <template>
     <div>
-        <modal name="new-task" height="auto" width="400px">
+        <modal name="new-task" height="auto" adaptive>
+            <button type="button" class="close float-right p-2" aria-label="Close" @click="$modal.hide('new-task')">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <form @submit.prevent="addTask" method="POST" class="p-4">
                 <div class="flex mb-4">
                     <div class="form-group">
@@ -10,7 +13,7 @@
 
                     <div class="form-group">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" cols="10" rows="10" class="form-control" v-model="description"></textarea>
+                        <textarea name="description" id="description" cols="8" rows="8" class="form-control" v-model="description"></textarea>
                     </div>
 
                     <div class="form-group">

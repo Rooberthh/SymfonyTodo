@@ -88,10 +88,10 @@
                 }
             },
             calcOffset(){
-              let test = moment(this.task.updatedAt);
+              let updatedAt = moment(this.task.updatedAt);
               let deadline = moment(this.task.deadline);
 
-              return Math.floor(moment.duration(deadline.diff(test)).asHours());
+              return Math.floor(moment.duration(deadline.diff(updatedAt)).asHours());
             }
         },
         computed: {
